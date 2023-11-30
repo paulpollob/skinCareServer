@@ -1,5 +1,5 @@
 const express = require('express')
-const tf = require('@tensorflow/tfjs');
+const tf = require('@tensorflow');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors')
@@ -13,7 +13,7 @@ app.use(express.json());
 
 
 // Load the model
-// const model = tf.loadModel('best_model.h5');
+const model = tf.loadModel('best_model.h5');
 
 
 // Define the endpoint for receiving and processing images
