@@ -5,8 +5,8 @@ def create_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # Bind the socket to a specific address and port
-    # server_address = ('localhost', 8080)
-    server_address = ('127.0.0.1', 8000)
+    server_address = ('localhost', 8080)
+    # server_address = ('127.0.0.1', 8000)
 
     server_socket.bind(server_address)
 
