@@ -1,5 +1,6 @@
 const express = require('express')
-const tf = require('@tensorflow');
+const tf = require('@tensorflow/tfjs-node');
+const tfjsConverter = require('@tensorflow/tfjs-converter');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors')
@@ -13,7 +14,26 @@ app.use(express.json());
 
 
 // Load the model
-const model = tf.loadModel('best_model.h5');
+// const model = tf.loadLayersModel('best_model.h5');
+const h5ModelPath = 'path/to/your/best_model.h5';
+
+// console.log("Hk: ", tf.loadModel())
+
+async function loadModel() {
+    const url = 'file:///media/pollob/C/SkinCareServer/';
+    // Read the .h5 model file from the current directory
+    const modelPath = path.resolve(url, 'best_model.h5');
+    const modelData = await tf.io.browserFiles.readFile(modelPath, { splitChunks: true });
+
+    // Convert the .h5 model to .json format
+    const convertedModel = await tf.io.browserFiles.readFile(modelData, { splitChunks: true });
+    const modelJSON = JSON.stringify(convertedModel);
+  }
+  
+  loadModel();
+// const modelPath = 'best_model.h5';
+//     const modelFile = fs.readFileSync(modelPath);
+//     model = tf.loadLayersModel(tf.node.decodeHDF5(new Uint8Array(modelFile)));
 
 
 // Define the endpoint for receiving and processing images
